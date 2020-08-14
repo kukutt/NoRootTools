@@ -16,6 +16,28 @@ function endcheck(){
     fi
 }
 
+function openssl(){
+    [ -d "./openssl" ] || git clone https://github.com/openssl/openssl openssl
+    pushd ./openssl
+    git checkout releases/gcc-7.5.0
+    ./contrib/download_prerequisites
+    ./configure --prefix=$PWD/../mytools/ --enable-threads=posix --disable-multilib --enable-languages=c,c++
+    make && make install
+    popd
+	endcheck "$PWD/../nrt/bin/gcc"
+}
+
+function gcc(){
+    [ -d "./gcc" ] || git clone git://gcc.gnu.org/git/gcc.git gcc
+    pushd ./gcc
+    git checkout releases/gcc-7.5.0
+    ./contrib/download_prerequisites
+    ./configure --prefix=$PWD/../mytools/ --enable-threads=posix --disable-multilib --enable-languages=c,c++
+    make && make install
+    popd
+	endcheck "$PWD/../nrt/bin/gcc"
+}
+
 function cmake(){
     [ -f "./cmake-3.18.1.tar.gz" ] || wget https://github.com/Kitware/CMake/releases/download/v3.18.1/cmake-3.18.1.tar.gz
     [ -d "./cmake-3.18.1" ] || tar -zxvf cmake-3.18.1.tar.gz
@@ -23,7 +45,7 @@ function cmake(){
     ./configure --prefix=$PWD/../nrt/
     make && make install
     popd
-	endcheck "./test"
+	endcheck "$PWD/../nrt/bin/cmake"
 }
 
 . ./env.sh
