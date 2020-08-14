@@ -19,12 +19,10 @@ function endcheck(){
 function openssl(){
     [ -d "./openssl" ] || git clone https://github.com/openssl/openssl openssl
     pushd ./openssl
-    git checkout releases/gcc-7.5.0
-    ./contrib/download_prerequisites
-    ./configure --prefix=$PWD/../mytools/ --enable-threads=posix --disable-multilib --enable-languages=c,c++
+    ./config --prefix=$PWD/../nrt/
     make && make install
     popd
-    endcheck "$PWD/nrt/bin/gcc"
+    endcheck "$PWD/nrt/bin/openssl"
 }
 
 function gcc(){
