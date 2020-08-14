@@ -16,10 +16,17 @@ function endcheck(){
     fi
 }
 
-function test(){
-    echo testtest
+function cmake(){
+    [ -f "./cmake-3.18.1.tar.gz" ] || wget https://github.com/Kitware/CMake/releases/download/v3.18.1/cmake-3.18.1.tar.gz
+    [ -d "./cmake-3.18.1" ] || tar -zxvf cmake-3.18.1.tar.gz
+    pushd ./cmake-3.18.1
+    ./configure --prefix=$PWD/../nrt/
+    make && make install
+    popd
 	endcheck "./test"
 }
+
+. ./env.sh
 
 for arg in $*
 do
