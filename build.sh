@@ -22,7 +22,7 @@ function test(){
 }
 
 for arg in $*
-	do
+do
 	echo "run $arg"
     $arg
 done
