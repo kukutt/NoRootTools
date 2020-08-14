@@ -26,3 +26,7 @@ do
 	echo "run $arg"
     $arg
 done
+
+
+echo '环境变量1: PATH=$PWD/../nrt/bin/:$PATH LD_LIBRARY_PATH=$PWD/../nrt/lib/:$PWD/../nrt/lib64/'
+echo '环境变量2: . ./evn.sh'
