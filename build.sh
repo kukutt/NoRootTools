@@ -24,7 +24,7 @@ function openssl(){
     ./configure --prefix=$PWD/../mytools/ --enable-threads=posix --disable-multilib --enable-languages=c,c++
     make && make install
     popd
-	endcheck "$PWD/../nrt/bin/gcc"
+    endcheck "$PWD/nrt/bin/gcc"
 }
 
 function gcc(){
@@ -35,7 +35,7 @@ function gcc(){
     ./configure --prefix=$PWD/../mytools/ --enable-threads=posix --disable-multilib --enable-languages=c,c++
     make && make install
     popd
-	endcheck "$PWD/../nrt/bin/gcc"
+    endcheck "$PWD/nrt/bin/gcc"
 }
 
 function cmake(){
@@ -45,7 +45,7 @@ function cmake(){
     ./configure --prefix=$PWD/../nrt/
     make && make install
     popd
-	endcheck "$PWD/../nrt/bin/cmake"
+    endcheck "$PWD/nrt/bin/cmake"
 }
 
 . ./env.sh
