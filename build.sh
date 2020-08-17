@@ -16,7 +16,7 @@ function endcheck(){
     fi
 }
 
-function gcc(){
+function gcc_build(){
     [ -d "./gcc" ] || git clone git://gcc.gnu.org/git/gcc.git gcc
     pushd ./gcc
     git checkout releases/gcc-7.5.0
@@ -27,7 +27,7 @@ function gcc(){
     endcheck "$PWD/nrt/bin/gcc"
 }
 
-function openssl(){
+function openssl_build(){
     [ -d "./openssl" ] || git clone https://github.com/openssl/openssl openssl
     pushd ./openssl
     ./config --prefix=$PWD/../nrt/
@@ -36,7 +36,7 @@ function openssl(){
     endcheck "$PWD/nrt/bin/openssl"
 }
 
-function cmake(){
+function cmake_build(){
     [ -f "./cmake-3.18.1.tar.gz" ] || wget https://github.com/Kitware/CMake/releases/download/v3.18.1/cmake-3.18.1.tar.gz
     [ -d "./cmake-3.18.1" ] || tar -zxvf cmake-3.18.1.tar.gz
     pushd ./cmake-3.18.1
@@ -46,7 +46,7 @@ function cmake(){
     endcheck "$PWD/nrt/bin/cmake"
 }
 
-function ffmpeg(){
+function ffmpeg_build(){
     [ -d "./x264" ] || git clone http://git.videolan.org/git/x264.git
     pushd ./x264 
     git checkout db0d417728460c647ed4a847222a535b00d3dbcb
@@ -76,8 +76,13 @@ function ffmpeg(){
 
 for arg in $*
 do
-	echo "run $arg"
-    $arg
+    echo "run $arg"
+    if [ $arg == 'help' ];
+    then
+        help
+    else
+        ${arg}_build
+    fi
 done
 
 
