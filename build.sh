@@ -5,7 +5,7 @@
 
 function help(){
     echo "help:"
-    echo "    ./build gcc cmake"
+    echo "    ./build gcc openssl cmake ffmpeg"
 }
 
 function endcheck(){
@@ -53,7 +53,7 @@ function ffmpeg(){
     ./configure --prefix=$PWD/../nrt/ --disable-asm --enable-shared
     make && make install
     popd
-    endcheck "$PWD/nrt/bin/ffmpeg"
+    endcheck "$PWD/nrt/bin/x264"
 
     [ -f "./x265_3.2.tar.gz" ] || wget http://download.videolan.org/videolan/x265/x265_3.2.tar.gz
     [ -d "./x265_3.2" ] || tar -zxvf x265_3.2.tar.gz
@@ -61,7 +61,7 @@ function ffmpeg(){
     cmake -DCMAKE_INSTALL_PREFIX=$PWD/../nrt/ source
     make && make install
     popd
-    endcheck "$PWD/nrt/bin/ffmpeg"
+    endcheck "$PWD/nrt/bin/x265"
 
     [ -d "./ffmpeg" ] || git clone https://git.ffmpeg.org/ffmpeg.git
     pushd ./ffmpeg
