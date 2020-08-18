@@ -21,7 +21,7 @@ function gcc_build(){
     pushd ./gcc
     git checkout releases/gcc-7.5.0
     ./contrib/download_prerequisites
-    ./configure --prefix=$PWD/../mytools/ --enable-threads=posix --disable-multilib --enable-languages=c,c++
+    ./configure --prefix=$PWD/../nrt/ --enable-threads=posix --disable-multilib --enable-languages=c,c++
     make && make install
     popd
     endcheck "$PWD/nrt/bin/gcc"
